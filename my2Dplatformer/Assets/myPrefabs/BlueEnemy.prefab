@@ -176,6 +176,9 @@ MonoBehaviour:
   _patrollingSpeed: 2
   _followingSpeed: 3
   _patrollingDiameter: 0
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
   _patrollingStateSprite: {fileID: 21300002, guid: ecd359c045351424082d2ba03ec132df, type: 3}
   _followingStateSprite: {fileID: 21300022, guid: addd2af175d074643a3b1f29f6c23041, type: 3}
 --- !u!114 &6802924316951406774

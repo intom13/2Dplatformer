@@ -9,7 +9,6 @@ public class SpawnerSelector : MonoBehaviour
     [SerializeField] private List<Transform> _spawnPoints = new List<Transform>();
 
     private WaitForSeconds _spawnerRechargeTime;
-    private bool _isSpawnerEnable = true;
 
     private void Start()
     {
@@ -20,9 +19,11 @@ public class SpawnerSelector : MonoBehaviour
 
     private IEnumerator SelectionCycle()
     {
-        while (_isSpawnerEnable)
+        int chosenSpawnerNumber;
+
+        while (enabled)
         {
-            int chosenSpawnerNumber = Random.Range(0, _spawnPoints.Count);
+            chosenSpawnerNumber = Random.Range(0, _spawnPoints.Count);
 
             SpawnLaunch(_spawnPoints[chosenSpawnerNumber]);
 

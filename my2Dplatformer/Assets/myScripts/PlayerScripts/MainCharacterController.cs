@@ -7,12 +7,11 @@ public class MainCharacterController : MonoBehaviour
     [SerializeField] private float _checkRadius;
     [SerializeField] private Transform _feetPosition;
     [SerializeField] private LayerMask _contactGround;
-    
-    private Animator _animator;
-    private int _idleState = 0;
-    private int _walkState = 1;
-    private int _jumpState = 2;
 
+    private readonly int _isMovingHorizontalParameter = Animator.StringToHash("IsMovingHorizontal");
+    private readonly int _isGroundedParameter = Animator.StringToHash("IsGrounded");
+
+    private Animator _animator;
     private PlayerAttacker _playerAttacker;
     private PlayerMover _playerMover;
 
@@ -29,32 +28,30 @@ public class MainCharacterController : MonoBehaviour
     {
         _isGrounded = Physics2D.OverlapCircle(_feetPosition.position, _checkRadius, _contactGround);
 
-        if(_isGrounded == false)
-            _animator.SetInteger("State", _jumpState);
+        if (_isGrounded == false)
+            _animator.SetBool(_isGroundedParameter, false);
 
         if (Input.GetMouseButtonDown(0))
-        {
             _playerAttacker.Punch();
-        }
 
         if (_isGrounded == true && Input.GetKey(KeyCode.Space))
             _playerMover.Jump();
 
         if (Input.GetButton("Horizontal") && _isGrounded)
         {
-            _animator.SetInteger("State", _walkState);
+            _animator.SetBool(_isMovingHorizontalParameter, true);
+            _animator.SetBool(_isGroundedParameter, true);
             _playerMover.Walk();
         }
-        else
+        else if (_isGrounded)
         {
-            if(Input.GetButton("Horizontal"))
-                _playerMover.Walk();
-            if (_isGrounded)
-                _animator.SetInteger("State", _idleState);
+            _animator.SetBool(_isMovingHorizontalParameter, false);
+            _animator.SetBool(_isGroundedParameter, true);
+        }
+        else if (Input.GetButton("Horizontal"))
+        {
+            _playerMover.Walk();
         }
     }
-
-
-    
 }
 

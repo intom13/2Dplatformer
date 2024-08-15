@@ -5,6 +5,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _patrollingSpeed;
     [SerializeField] private float _followingSpeed;
     [SerializeField] private float _patrollingDiameter;
+    [SerializeField] private LayerMask _playerLayer;
 
     [SerializeField] private Sprite _patrollingStateSprite;
     [SerializeField] private Sprite _followingStateSprite;
@@ -21,9 +22,8 @@ public class EnemyMover : MonoBehaviour
     private readonly float _lookDistance = 8f;
     private readonly int _reverseDirectionCoefficent = -1;
 
-    private RaycastHit2D hit;
-    private Vector3 _rayStartPositionX = new Vector3(2, 0, 0);
-    private Vector3 _rayStartPositionY = new Vector3(0, 1, 0);
+    private Vector3 _rayPositionOffsetX = new Vector3(2, 0, 0);
+    private Vector3 _rayPositionOffsetY = new Vector3(0, 1, 0);
 
     private void Start()
     {
@@ -42,8 +42,7 @@ public class EnemyMover : MonoBehaviour
 
     private void Tracking()
     {
-        hit = Physics2D.Raycast(_transform.position + _rayStartPositionY + _rayStartPositionX * _lookDirection, Vector2.right * _lookDirection * _lookDistance);
-        Debug.DrawRay(_transform.position + _rayStartPositionY + _rayStartPositionX * _lookDirection, _transform.right * _lookDirection * _lookDistance, Color.black, 1);
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position + _rayPositionOffsetY + _rayPositionOffsetX * _lookDirection, Vector2.right * _lookDirection * _lookDistance, _lookDistance, _playerLayer);
 
         if (hit)
         {
@@ -69,7 +68,9 @@ public class EnemyMover : MonoBehaviour
         if (_targetPosition != null)
         {
             if (_transform.position.x != _targetPosition.x)
+            {
                 _transform.position = Vector3.MoveTowards(_transform.position, _targetPosition, _patrollingSpeed * Time.deltaTime);
+            }
             else
             {
                 _lookDirection *= _reverseDirectionCoefficent;
@@ -85,9 +86,7 @@ public class EnemyMover : MonoBehaviour
     private void Following(Transform target)
     {
         if (_attacking == null)
-        {
             _attacking = StartCoroutine(_enemyAttacker.Attacking());
-        }
         
         if (target != null && _transform.position != target.position)
             _transform.position = Vector2.MoveTowards(_transform.position, target.position, _followingSpeed * Time.deltaTime);

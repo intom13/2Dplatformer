@@ -16,11 +16,11 @@ public class PlayerMover : MonoBehaviour
 
     public void Walk()
     {
-        Vector3 dir = transform.right * Input.GetAxis("Horizontal");
+        Vector3 direction = transform.right * Input.GetAxis("Horizontal");
 
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, _speed * Time.deltaTime);
 
-        _spriteRenderer.flipX = dir.x < 0.0f;
+        _spriteRenderer.flipX = direction.x < 0.0f;
     }
 
     public void Jump()
