@@ -1,37 +1,12 @@
 using System;
 using UnityEngine;
 
-public class Player : HealthBehaviour
+public class Player : Health
 {
-    [SerializeField] private float _maxPlayerHealth;
+    public event Action GameFinished;
 
-    private float _playerHealth;
-
-    public event Action OnGameFinished;
-
-    private void Start()
+    protected override void Die()
     {
-        _playerHealth = _maxPlayerHealth;
-    }
-
-    public void ApplyDamage(float damage)
-    {
-        _playerHealth -= damage;
-
-        if (_playerHealth <= 0)
-            Die();
-    }
-
-    public void ApplyHeal(float healValue)
-    {
-        if(_maxPlayerHealth - _playerHealth >= healValue)
-            _playerHealth += healValue;
-        else
-            _playerHealth = _maxPlayerHealth;
-    }
-
-    override public void Die()
-    {
-        OnGameFinished?.Invoke();
+        GameFinished?.Invoke();
     }
 }

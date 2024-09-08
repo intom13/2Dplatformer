@@ -1,14 +1,10 @@
+using System;
 using UnityEngine;
 
-public class Enemy : HealthBehaviour
+public class Enemy : Health
 {
-    [SerializeField] private float _enemyHealth;
-
-    public void ApplyDamage(float damage)
+    protected override void Die()
     {
-        _enemyHealth -= damage;
-
-        if (_enemyHealth <= 0)
-            Die();
+        Destroy(gameObject);
     }
 }
