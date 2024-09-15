@@ -34,14 +34,14 @@ public class EnemyAttacker : MonoBehaviour
 
         foreach (var collider in _nearbyColliders)
         {
-            if (collider.TryGetComponent(out Health playerHealth))
+            if (collider.TryGetComponent(out Player player))
             {
-                Vector2 punchDirection = playerHealth.transform.position - transform.position;
+                Vector2 punchDirection = player.transform.position - transform.position;
 
-                if (playerHealth.TryGetComponent(out Rigidbody2D playerRigidbody))
+                if (player.TryGetComponent(out Rigidbody2D playerRigidbody))
                     playerRigidbody.AddForce(punchDirection.normalized * _punchForce, ForceMode2D.Impulse);
 
-                playerHealth.ApplyDamage(_damage);
+                player.ApplyDamage(_damage);
             }
         }
     }

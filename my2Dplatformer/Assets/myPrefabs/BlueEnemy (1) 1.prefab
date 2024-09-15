@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: Health
       value: 
       objectReference: {fileID: 3687681337606522660}
+    - target: {fileID: 2555664517078059733, guid: 823a781346a0a9640bf6dad483c397ee, type: 3}
+      propertyPath: Character
+      value: 
+      objectReference: {fileID: 3687681337606522660}
     - target: {fileID: 3230327183232242401, guid: 823a781346a0a9640bf6dad483c397ee, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -264,6 +268,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4872528367733396422, guid: 823a781346a0a9640bf6dad483c397ee, type: 3}
       propertyPath: Health
+      value: 
+      objectReference: {fileID: 3687681337606522660}
+    - target: {fileID: 4872528367733396422, guid: 823a781346a0a9640bf6dad483c397ee, type: 3}
+      propertyPath: Character
       value: 
       objectReference: {fileID: 3687681337606522660}
     - target: {fileID: 6204283522768385873, guid: 823a781346a0a9640bf6dad483c397ee, type: 3}

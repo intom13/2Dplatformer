@@ -47,14 +47,14 @@ public class EnemyMover : MonoBehaviour
         if (hit)
         {
             if (hit.collider.TryGetComponent(out Player player))
+            {
                 Following(player.transform);
-            else
-                Patrolling();
+
+                return;
+            }
         }
-        else
-        {
-            Patrolling();
-        }
+
+        Patrolling();
     }
 
     private void Patrolling()

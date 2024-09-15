@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMover))]
 [RequireComponent(typeof(PlayerAttacker))]
-public class MainCharacterController : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private float _checkRadius;
     [SerializeField] private Transform _feetPosition;
@@ -11,13 +11,17 @@ public class MainCharacterController : MonoBehaviour
     private readonly int _isMovingHorizontalParameter = Animator.StringToHash("IsMovingHorizontal");
     private readonly int _isGroundedParameter = Animator.StringToHash("IsGrounded");
 
+    private readonly KeyCode _jumpKey = KeyCode.Space;
+    private readonly int _attackMouseButton = 0;
+    private readonly string _horizontalInputAxis = "Horizontal";
+
     private Animator _animator;
     private PlayerAttacker _playerAttacker;
     private PlayerMover _playerMover;
 
     private bool _isGrounded;
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
         _playerAttacker = GetComponent<PlayerAttacker>();
@@ -28,16 +32,16 @@ public class MainCharacterController : MonoBehaviour
     {
         _isGrounded = Physics2D.OverlapCircle(_feetPosition.position, _checkRadius, _contactGround);
 
-        if (_isGrounded == false)
+        if (!_isGrounded)
             _animator.SetBool(_isGroundedParameter, false);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(_attackMouseButton))
             _playerAttacker.Punch();
 
-        if (_isGrounded == true && Input.GetKey(KeyCode.Space))
+        if (_isGrounded && Input.GetKey(_jumpKey))
             _playerMover.Jump();
 
-        if (Input.GetButton("Horizontal") && _isGrounded)
+        if (Input.GetButton(_horizontalInputAxis) && _isGrounded)
         {
             _animator.SetBool(_isMovingHorizontalParameter, true);
             _animator.SetBool(_isGroundedParameter, true);
@@ -48,7 +52,7 @@ public class MainCharacterController : MonoBehaviour
             _animator.SetBool(_isMovingHorizontalParameter, false);
             _animator.SetBool(_isGroundedParameter, true);
         }
-        else if (Input.GetButton("Horizontal"))
+        else if (Input.GetButton(_horizontalInputAxis))
         {
             _playerMover.Walk();
         }

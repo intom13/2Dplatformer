@@ -214,7 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9815ef310c7d846a6861e33ba6d5b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: {fileID: 0}
+  _playerHealth: {fileID: 0}
+  _enemyHealth: {fileID: 0}
   _bar: {fileID: 8894477468550582839}
   _speed: 0.5
 --- !u!114 &2555664517078059733
@@ -229,7 +230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d3cefffccd09746a80f414bf5e28ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: {fileID: 0}
+  _playerHealth: {fileID: 0}
+  _enemyHealth: {fileID: 0}
 --- !u!1 &4516856227356708029
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +391,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8611114391983057270
 MonoBehaviour:
   m_ObjectHideFlags: 0

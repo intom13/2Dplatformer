@@ -16,14 +16,14 @@ public class PlayerAttacker : MonoBehaviour
 
         foreach(var collider in _nearbyColliders)
         {
-            if (collider.TryGetComponent(out Health enemyHealth))
+            if (collider.TryGetComponent(out Enemy enemy))
             {
-                Vector2 punchDirection = enemyHealth.transform.position - transform.position;
+                Vector2 punchDirection = enemy.transform.position - transform.position;
 
-                if (enemyHealth.TryGetComponent(out Rigidbody2D enemyRigidbody))
+                if (enemy.TryGetComponent(out Rigidbody2D enemyRigidbody))
                     enemyRigidbody.AddForce(Vector2.up * _punchVerticalForce + punchDirection.normalized * _punchForce, ForceMode2D.Impulse);
 
-                enemyHealth.ApplyDamage(_damage);
+                enemy.ApplyDamage(_damage);
             }
         }
     }
