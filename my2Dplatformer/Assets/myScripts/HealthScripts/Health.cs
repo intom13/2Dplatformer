@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    protected float HealthValue = 100.0f;
+    private float _healthValue = 100.0f;
 
     private readonly float _maxValue = 100.0f;
     private readonly float _minValue = 0f;
@@ -14,25 +14,25 @@ public class Health : MonoBehaviour
 
     public void ApplyDamage(float damageValue)
     {
-        HealthValue -= damageValue;
+        _healthValue -= damageValue;
 
-        if (HealthValue < _minValue)
+        if (_healthValue < _minValue)
         {
-            HealthValue = _minValue;
+            _healthValue = _minValue;
             Die();
         }
 
-        Changed?.Invoke(HealthValue);
+        Changed?.Invoke(_healthValue);
     }
 
     public void ApplyHeal(float healValue)
     {
-        HealthValue += healValue;
+        _healthValue += healValue;
 
-        if (HealthValue > _maxValue)
-            HealthValue = _maxValue;
+        if (_healthValue > _maxValue)
+            _healthValue = _maxValue;
 
-        Changed?.Invoke(HealthValue);
+        Changed?.Invoke(_healthValue);
     }
 
     private void Die()
