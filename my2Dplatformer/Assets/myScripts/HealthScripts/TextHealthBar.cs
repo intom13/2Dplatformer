@@ -9,6 +9,6 @@ public class TextHealthBar : HealthDisplayer
 
     protected override void Display(float health)
     {
-        _bar.text = health.ToString() + _textBarSeparator + Character.MaxHealth;
+        _bar.text = health.ToString() + _textBarSeparator + Health.MaxValue;
     }
 }

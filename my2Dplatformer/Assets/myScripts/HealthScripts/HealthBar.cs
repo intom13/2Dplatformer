@@ -7,6 +7,6 @@ public class HealthBar : HealthDisplayer
 
     protected override void Display(float health)
     {
-        _bar.value = health / Character.MaxHealth;
+        _bar.value = health / Health.MaxValue;
     }
 }

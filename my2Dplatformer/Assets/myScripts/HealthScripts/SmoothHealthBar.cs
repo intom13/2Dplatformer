@@ -19,9 +19,9 @@ public class SmoothHealthBar : HealthDisplayer
 
     private IEnumerator DisplayBar(float health)
     {
-        while (!Mathf.Approximately(_bar.value, health / Character.MaxHealth))
+        while (!Mathf.Approximately(_bar.value, health / Health.MaxValue))
         {
-            _bar.value = Mathf.MoveTowards(_bar.value, health / Character.MaxHealth, _speed * Time.deltaTime);
+            _bar.value = Mathf.MoveTowards(_bar.value, health / Health.MaxValue, _speed * Time.deltaTime);
 
             yield return null;
         }
