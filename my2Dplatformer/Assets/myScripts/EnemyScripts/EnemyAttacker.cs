@@ -13,7 +13,7 @@ public class EnemyAttacker : MonoBehaviour
 
     private WaitForSeconds _timeBetweenPunch;
 
-    private void Start()
+    private void Awake()
     {
         _timeBetweenPunch = new WaitForSeconds(_attackTimeout);
     }

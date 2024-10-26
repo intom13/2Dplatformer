@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMover))]
 [RequireComponent(typeof(PlayerAttacker))]
+[RequireComponent(typeof(Vampirism))]
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private float _checkRadius;
@@ -12,12 +13,14 @@ public class PlayerInput : MonoBehaviour
     private readonly int _isGroundedParameter = Animator.StringToHash("IsGrounded");
 
     private readonly KeyCode _jumpKey = KeyCode.Space;
+    private readonly KeyCode _vampirismKey = KeyCode.Q;
     private readonly int _attackMouseButton = 0;
     private readonly string _horizontalInputAxis = "Horizontal";
 
     private Animator _animator;
     private PlayerAttacker _playerAttacker;
     private PlayerMover _playerMover;
+    private Vampirism _vampirism;
 
     private bool _isGrounded;
 
@@ -26,6 +29,7 @@ public class PlayerInput : MonoBehaviour
         _animator = GetComponent<Animator>();
         _playerAttacker = GetComponent<PlayerAttacker>();
         _playerMover = GetComponent<PlayerMover>();
+        _vampirism = GetComponent<Vampirism>();
     }
 
     private void Update()
@@ -34,6 +38,9 @@ public class PlayerInput : MonoBehaviour
 
         if (!_isGrounded)
             _animator.SetBool(_isGroundedParameter, false);
+
+        if (Input.GetKey(_vampirismKey))
+            _vampirism.Activate();
 
         if (Input.GetMouseButtonDown(_attackMouseButton))
             _playerAttacker.Punch();
